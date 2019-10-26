@@ -63,7 +63,13 @@ class Board extends React.Component {
   send = (e) => {
     const id = e.target.id;
     const msg = this.state.myposts[id].text;
-    console.log(id, msg)
+
+    const url = "http://localhost:3333/postits/create"
+    axios.post(url, {
+        user_id: 1,
+        text: msg
+    })
+
     let clone = {}
     Object.assign(clone , this.state.myposts);
     delete clone[id]
