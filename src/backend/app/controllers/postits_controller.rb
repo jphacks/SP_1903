@@ -7,6 +7,8 @@ class PostitsController < ApplicationController
       user_id: params[:user_id],
       text: params[:text],
     )
+
+    render status: 200, json: { status: 200, message: "Success" }
   end
 
   def show
