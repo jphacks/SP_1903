@@ -5,7 +5,7 @@ class PostitsController < ApplicationController
   def create
     @postit = Postit.create!(
       user_id: params[:user],
-      test: params[:test],
+      text: params[:text],
     )
   end
 

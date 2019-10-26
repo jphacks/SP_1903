@@ -13,8 +13,8 @@ User.create!([
 ])
 
 Postit.create!([
-  { user_id: 1, test: 'Initial postit!' },
-  { user_id: 2, test: 'Initial postit!' },
-  { user_id: 3, test: 'Initial postit!' },
-  { user_id: 4, test: 'Initial postit!' },
+  { user_id: 1, text: 'Initial postit!' },
+  { user_id: 2, text: 'Initial postit!' },
+  { user_id: 3, text: 'Initial postit!' },
+  { user_id: 4, text: 'Initial postit!' },
 ])
