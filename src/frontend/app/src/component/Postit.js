@@ -2,9 +2,12 @@ import React from 'react';
 
 
 class Board extends React.Component {
-  render(){
+  render(props, state){
       return (
-          <div>hoge</div>
+          <div>
+              <div>{this.props.data.user}</div>
+              <div>{this.props.data.text}</div>
+          </div>
       )
   }
 }
