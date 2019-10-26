@@ -1,5 +1,6 @@
 import React from 'react';
 import Postit from './Postit';
+import './app.css';
 
 class Board extends React.Component {
 　
@@ -57,7 +58,7 @@ class Board extends React.Component {
               <div className = "postit_area">
                   {this.state.myposts.map((post) => {
                       return (
-                         <div>
+                         <div className = "mypostit">
                             <button className = 'send'>send</button>
                             <Postit data = {post} />
                          </div>
