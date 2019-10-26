@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+User.create!([
+  { name: 'マツダ' },
+  { name: 'セキネ' },
+  { name: 'サトウ' },
+  { name: 'アイカワ' },
+])
+
+Postit.create!([
+  { user_id: 1, text: 'Initial postit!' },
+  { user_id: 2, text: 'Initial postit!' },
+  { user_id: 3, text: 'Initial postit!' },
+  { user_id: 4, text: 'Initial postit!' },
+])
