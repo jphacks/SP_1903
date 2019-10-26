@@ -4,7 +4,7 @@ services:
     build:
       context: .
     ports:
-      - "3000:3333"
+      - "3333:3000"
     volumes:
       - ./:/app
-    command: bundle exec rails -p 3333 s -b 0.0.0.0
+    command: bundle exec rails s -b 0.0.0.0
