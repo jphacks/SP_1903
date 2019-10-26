@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-class Board extends React.Component {
+class Postit.js extends React.Component {
   render(props, state){
       return (
-          <div>
+          <div className = 'postit'>
               <div>{this.props.data.user}</div>
               <div>{this.props.data.text}</div>
           </div>
@@ -12,4 +12,4 @@ class Board extends React.Component {
   }
 }
 
-export default Board;
+export default Postit.js;
