@@ -1,0 +1,74 @@
+.board{
+  position: absolute;
+  background-color: #D3D3D3;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  border: 1px solid;
+  text-align: left;
+  width: 70%;
+  height: 50%;
+  left: 15%;
+  top:15%;
+}
+
+.postit{
+  position: relative;
+  display: inline-block;
+  background-color: #FF0461;
+  text-align: center;
+  border: 1px solid;
+  margin-top: 1%;
+  margin-left: 1%;
+  height: 40%;
+  width: 15%;
+  left: 0;
+}
+
+.postit_area{
+  background-color: #A9A9A9;
+  position: absolute;
+  border: 1px solid;
+  height: 30%;
+  width: 70%;
+  top: 69.7%;
+  left: 15%;
+}
+
+.mypostit{
+  position: relative;
+  display: inline-block;
+  border: 1px solid;
+  background-color: #99FF33;
+  text-align: center;
+  margin-left: 1%;
+  margin-top: 1%;
+  height: 90%;
+  width: 25%;
+  top: 5%;
+}
+
+.send{
+  position: absolute;
+  margin-bottom: 1%;
+  bottom: 1%;
+  margin-left: 1%;
+  left: 1%;
+}
+
+.textarea{
+  position: absolute;
+  background-color: #99FF33;
+  margin-top: 5%;
+  margin-left: 5%;
+  left: 0%;
+  width: 88%;
+  height: 74%;
+}
+
+.add_post{
+  position: absolute;
+  height: 15%;
+  width: 10%;
+  right: 5%;
+  top: 5%;
+}
