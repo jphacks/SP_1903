@@ -76,7 +76,17 @@ class Board extends React.Component {
      this.setState({
          myposts: clone
      })
-  }
+
+     let cloneposts = []
+     Object.assign(cloneposts, this.state.allposts);
+     cloneposts.push({
+        "user_id" : 1,
+        "text" : msg
+     })
+     this.setState({
+         allposts: cloneposts
+     })
+    }
 
   change = (e) => {
      const msg = e.target.value;
