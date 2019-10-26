@@ -12,7 +12,7 @@ class PostitsController < ApplicationController
   def show
     postits = Postit.all
 
-    render :json => postits
+    render json: { data: postits }
   end
 
 end
