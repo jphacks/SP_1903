@@ -21,17 +21,18 @@ class Board extends React.Component {
                 "text" : "text"
             },
         ],
-        myposts : [
-            {
+        myposts : {
+            0 : {
                 "text" : "text",
             },
-            {
+            1 : {
                 "text" : "text",
             },
-            {
+            2 : {
                 "text" : "text",
             }
-        ],
+        },
+        count : 3,
     }
   }
 
@@ -42,6 +43,43 @@ class Board extends React.Component {
         this.setState({posts : res})
     })
     */
+  }
+
+  add_post = (e) => {
+    let clone = {}
+    Object.assign(clone , this.state.myposts);
+    clone[this.state.count] = {
+        "text":"text"
+    }
+    this.setState({count : this.state.count + 1})
+     this.setState({
+         myposts: clone
+     })
+  }
+   
+  send = (e) => {
+    const id = e.target.id;
+    const msg = this.state.myposts[id].text;
+    console.log(id, msg)
+    let clone = {}
+    Object.assign(clone , this.state.myposts);
+    delete clone[id]
+     this.setState({
+         myposts: clone
+     })
+  }
+
+  change = (e) => {
+     const msg = e.target.value;
+     const id = e.target.id
+     let clone = {}
+     Object.assign(clone , this.state.myposts);
+     clone[id] = {
+         "text":msg
+     };
+     this.setState({
+         myposts: clone
+     })
   }
 　　
   render(props, state){
@@ -56,15 +94,18 @@ class Board extends React.Component {
               </div>
 
               <div className = "postit_area">
-                  {this.state.myposts.map((post) => {
+                  {Object.keys(this.state.myposts).map((key) => {
                       return (
                          <div className = "mypostit">
-                            <button className = 'send'>send</button>
-                            <Postit data = {post} />
+                            <button id = {key} className = 'send' onClick = {this.send}>send</button>
+                            <textarea id = {key} value = {this.state.myposts[key].text} onChange = {this.change}></textarea> 
                          </div>
                          
                       )
                   })}
+                  <div>
+                      <button className = 'add_post' onClick = {this.add_post}>ADD</button>
+                  </div>
               </div>
           </div>
       )
