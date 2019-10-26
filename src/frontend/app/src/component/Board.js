@@ -1,6 +1,7 @@
 import React from 'react';
 import Postit from './Postit';
 import './app.css';
+import axios from 'axios';
 
 class Board extends React.Component {
 　
@@ -37,12 +38,14 @@ class Board extends React.Component {
   }
 
   componentDidMount(){
-    const url = "http://localhost:3000";
-    /*
-    fetch(url).then(res => {
-        this.setState({posts : res})
+    const url = "http://localhost:3333/postits/show"
+    axios(url).then((res) => {
+        let data = res.data["data"];
+        console.log(data)
+        this.setState({allposts:data})
+
     })
-    */
+
   }
 
   add_post = (e) => {
