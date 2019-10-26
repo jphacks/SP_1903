@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-class Postit.js extends React.Component {
+class Postit extends React.Component {
   render(props, state){
       return (
           <div className = 'postit'>
@@ -12,4 +12,4 @@ class Postit.js extends React.Component {
   }
 }
 
-export default Postit.js;
+export default Postit;
