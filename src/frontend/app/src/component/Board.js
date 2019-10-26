@@ -98,7 +98,7 @@ class Board extends React.Component {
                       return (
                          <div className = "mypostit">
                             <button id = {key} className = 'send' onClick = {this.send}>send</button>
-                            <textarea id = {key} value = {this.state.myposts[key].text} onChange = {this.change}></textarea> 
+                            <textarea id = {key} className = 'textarea' value = {this.state.myposts[key].text} onChange = {this.change}></textarea> 
                          </div>
                          
                       )
