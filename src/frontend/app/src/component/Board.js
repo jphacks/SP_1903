@@ -101,6 +101,16 @@ class Board extends React.Component {
         this.setState({
             myposts: clone
         })
+
+        let postsclone = {}
+        Object.assign(postsclone, this.state.postsbypaper);
+        // get inserted data from res and push to postsbypaper;
+        console.log(postsclone);
+        postsclone[paper_id].push(res.data['data'])
+        this.setState({
+            postsbypaper: postsclone
+        })
+
     })
     
   }
