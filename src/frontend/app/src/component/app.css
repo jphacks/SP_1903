@@ -124,7 +124,7 @@
   border-radius: 50%;
   outline:none;
 }
-.btn-circle-stitch:hover {
+.add_post:hover {
   background: #668ad8;
   box-shadow: 0px 0px 0px 5px #668ad8;
 }
