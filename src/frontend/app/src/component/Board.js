@@ -174,16 +174,17 @@ class Board extends React.Component {
                       return (
                          <div className = "mypostit">
                             <div>
-                                <input id = {key} type = 'text' onChange = {this.change_paper} placeholder = 'paper_id' value = {this.state.myposts[key].paper_id}></input>
+                                <span className = 'paperidtext'>Paper ID : </span>
+                                <input id = {key} type = 'text' onChange = {this.change_paper} placeholder = 'paper_id' value = {this.state.myposts[key].paper_id} className = 'paper_id_textarea'></input>
                             </div>
-                            <button id = {key} className = 'send' onClick = {this.send}>send</button>
+                            <button id = {key} className = 'send' onClick = {this.send}>Prot</button>
                             <textarea id = {key} className = 'textarea' value = {this.state.myposts[key].text} onChange = {this.change}></textarea> 
                          </div>
                          
                       )
                   })}
                   <div>
-                      <button className = 'add_post' onClick = {this.add_post}>ADD</button>
+                      <button className = 'add_post' onClick = {this.add_post}>+</button>
                   </div>
               </div>
           </div>
