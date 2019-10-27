@@ -8,20 +8,8 @@ class Board extends React.Component {
 　constructor(){
     super();
     this.state = {
-        allposts : [
-            {
-                "user" : "user_a",
-                "text" : "text"
-            },
-            {
-                "user" : "user_a",
-                "text" : "text"
-            },
-            {
-                "user" : "user_a",
-                "text" : "text"
-            },
-        ],
+        paper : [],
+        allposts : [],
         myposts : {
             0 : {
                 "text" : "text",
@@ -34,15 +22,40 @@ class Board extends React.Component {
             }
         },
         count : 3,
+        postsbypaper: {},
     }
   }
 
   componentDidMount(){
-    const url = "http://localhost:3333/postits/show"
-    axios(url).then((res) => {
+
+    const poster_url = "http://localhost:3333/papers/show"
+    axios(poster_url).then((res) => {
         let data = res.data["data"];
-        console.log(data)
-        this.setState({allposts:data})
+        let postbypaper = {}
+        data.forEach(element => {
+            postbypaper[element["id"]] = []
+        });
+
+        this.setState({
+            postsbypaper: postbypaper
+        })
+
+        const postit_url = "http://localhost:3333/postits/show"
+        return axios(postit_url)
+        
+    }).then((res) => {
+
+        let data = res.data["data"];
+        
+        let postbypaper = JSON.parse(JSON.stringify(this.state.postsbypaper))
+
+        data.forEach(element => {
+            if(element["paper_id"] === null) return ;
+            postbypaper[element['paper_id']].push(element)
+        })
+        this.setState({
+            postsbypaper: postbypaper
+        })
 
     })
 
