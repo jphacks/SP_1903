@@ -1,10 +1,7 @@
 .board{
   position: absolute;
   background-color: #D3D3D3;
-  flex-basis: 100%;
-  flex-wrap: wrap;
   border: 1px solid;
-  text-align: left;
   width: 70%;
   height: 50%;
   left: 15%;
@@ -12,11 +9,12 @@
 }
 
 .postit{
-  position: relative;
+  vertical-align: top;
   display: inline-block;
-  background-color: #FF0461;
+  position: static;
+  background-color: #f2bac3;
+  overflow-wrap: break-word;
   text-align: center;
-  border: 1px solid;
   margin-top: 1%;
   margin-left: 1%;
   height: 40%;
@@ -25,6 +23,7 @@
 }
 
 .postit_area{
+  overflow: hidden;
   background-color: #A9A9A9;
   position: absolute;
   border: 1px solid;
@@ -37,9 +36,7 @@
 .mypostit{
   position: relative;
   display: inline-block;
-  border: 1px solid;
-  background-color: #99FF33;
-  text-align: center;
+  background-color: #fef49f;
   margin-left: 1%;
   margin-top: 1%;
   height: 90%;
@@ -55,13 +52,12 @@
   left: 1%;
 }
 
-.textarea{
+ .textarea{
   position: absolute;
-  background-color: #99FF33;
+  /*background-color: #fef49f; */
   margin-top: 5%;
-  margin-left: 5%;
-  left: 0%;
-  width: 88%;
+  left: 5%;
+  width: 87%;
   height: 74%;
 }
 
