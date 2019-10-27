@@ -13,12 +13,15 @@ class Board extends React.Component {
         papers : {},
         myposts : {
             0 : {
+                "paper_id":1,
                 "text" : "text",
             },
             1 : {
+                "paper_id":1,
                 "text" : "text",
             },
             2 : {
+                "paper_id":1,
                 "text" : "text",
             }
         },
@@ -53,6 +56,7 @@ class Board extends React.Component {
 
         data.forEach(element => {
             if(element["paper_id"] === null) return ;
+            if(postbypaper[element["paper_id"]] === undefined) return ;
             postbypaper[element['paper_id']].push(element)
         })
         this.setState({
@@ -80,13 +84,25 @@ class Board extends React.Component {
   send = (e) => {
     const id = e.target.id;
     const msg = this.state.myposts[id].text;
-    console.log(id, msg)
-    let clone = {}
-    Object.assign(clone , this.state.myposts);
-    delete clone[id]
-     this.setState({
-         myposts: clone
-     })
+    const paper_id = this.state.myposts[id].paper_id;
+
+    const send_data = {
+        'paper_id': parseInt(paper_id),
+        'text': msg,
+        'user_id': 1,
+    }
+
+    const url = "http://localhost:3333/postits/create"
+
+    axios.post(url, send_data).then((res) => {
+        let clone = {}
+        Object.assign(clone , this.state.myposts);
+        delete clone[id]
+        this.setState({
+            myposts: clone
+        })
+    })
+    
   }
 
   change = (e) => {
@@ -95,11 +111,30 @@ class Board extends React.Component {
      let clone = {}
      Object.assign(clone , this.state.myposts);
      clone[id] = {
+         "paper_id": clone[id]['paper_id'],
          "text":msg
      };
+
      this.setState({
          myposts: clone
      })
+  }
+
+  change_paper = (e) => {
+     const paper_id = e.target.value;
+     const id = e.target.id
+     
+     let clone = {}
+     Object.assign(clone, this.state.myposts);
+     clone[id] = {
+        "paper_id": paper_id,
+        "text": clone[id]['text']
+     }
+
+     this.setState({
+         myposts:clone
+     })
+     
   }
 　　
   render(props, state){
@@ -129,7 +164,7 @@ class Board extends React.Component {
                       return (
                          <div className = "mypostit">
                             <div>
-                                <input id = {key} type = 'text' onChange = {this.change_paper} placeholder = 'paper_id'></input>
+                                <input id = {key} type = 'text' onChange = {this.change_paper} placeholder = 'paper_id' value = {this.state.myposts[key].paper_id}></input>
                             </div>
                             <button id = {key} className = 'send' onClick = {this.send}>send</button>
                             <textarea id = {key} className = 'textarea' value = {this.state.myposts[key].text} onChange = {this.change}></textarea> 

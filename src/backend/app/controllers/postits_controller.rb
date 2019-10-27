@@ -4,6 +4,7 @@ class PostitsController < ApplicationController
 
   def create
     @postit = Postit.create!(
+      paper_id: params[:paper_id],
       user_id: params[:user_id],
       text: params[:text],
     )
