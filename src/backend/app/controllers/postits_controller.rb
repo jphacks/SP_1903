@@ -4,11 +4,12 @@ class PostitsController < ApplicationController
 
   def create
     @postit = Postit.create!(
+      paper_id: params[:paper_id],
       user_id: params[:user_id],
       text: params[:text],
     )
-
-    render status: 200, json: { status: 200, message: "Success" }
+    
+    render status: 200, json: { status: 200, message: "Success", data: @postit}
   end
 
   def show

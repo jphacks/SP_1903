@@ -8,29 +8,34 @@ class Board extends React.Component {
 　constructor(){
     super();
     this.state = {
-        paper : [],
+        postsbypaper : {},
         allposts : [],
+        papers : {},
         myposts : {
             0 : {
+                "paper_id":1,
                 "text" : "text",
             },
             1 : {
+                "paper_id":1,
                 "text" : "text",
             },
             2 : {
+                "paper_id":1,
                 "text" : "text",
             }
         },
         count : 3,
-        postsbypaper: {},
     }
   }
 
   componentDidMount(){
-
     const poster_url = "http://localhost:3333/papers/show"
     axios(poster_url).then((res) => {
         let data = res.data["data"];
+        this.setState({
+            papers: data
+        })
         let postbypaper = {}
         data.forEach(element => {
             postbypaper[element["id"]] = []
@@ -51,11 +56,14 @@ class Board extends React.Component {
 
         data.forEach(element => {
             if(element["paper_id"] === null) return ;
+            if(postbypaper[element["paper_id"]] === undefined) return ;
             postbypaper[element['paper_id']].push(element)
         })
         this.setState({
             postsbypaper: postbypaper
         })
+
+        console.log(this.state.postsbypaper)
 
     })
 
@@ -76,30 +84,36 @@ class Board extends React.Component {
   send = (e) => {
     const id = e.target.id;
     const msg = this.state.myposts[id].text;
+    const paper_id = this.state.myposts[id].paper_id;
+
+    const send_data = {
+        'paper_id': parseInt(paper_id),
+        'text': msg,
+        'user_id': 1,
+    }
 
     const url = "http://localhost:3333/postits/create"
-    axios.post(url, {
-        user_id: 1,
-        text: msg
+
+    axios.post(url, send_data).then((res) => {
+        let clone = {}
+        Object.assign(clone , this.state.myposts);
+        delete clone[id]
+        this.setState({
+            myposts: clone
+        })
+
+        let postsclone = {}
+        Object.assign(postsclone, this.state.postsbypaper);
+        // get inserted data from res and push to postsbypaper;
+        console.log(postsclone);
+        postsclone[paper_id].push(res.data['data'])
+        this.setState({
+            postsbypaper: postsclone
+        })
+
     })
-
-    let clone = {}
-    Object.assign(clone , this.state.myposts);
-    delete clone[id]
-     this.setState({
-         myposts: clone
-     })
-
-     let cloneposts = []
-     Object.assign(cloneposts, this.state.allposts);
-     cloneposts.push({
-        "user_id" : 1,
-        "text" : msg
-     })
-     this.setState({
-         allposts: cloneposts
-     })
-    }
+    
+  }
 
   change = (e) => {
      const msg = e.target.value;
@@ -107,28 +121,61 @@ class Board extends React.Component {
      let clone = {}
      Object.assign(clone , this.state.myposts);
      clone[id] = {
+         "paper_id": clone[id]['paper_id'],
          "text":msg
      };
+
      this.setState({
          myposts: clone
      })
+  }
+
+  change_paper = (e) => {
+     const paper_id = e.target.value;
+     const id = e.target.id
+     
+     let clone = {}
+     Object.assign(clone, this.state.myposts);
+     clone[id] = {
+        "paper_id": paper_id,
+        "text": clone[id]['text']
+     }
+
+     this.setState({
+         myposts:clone
+     })
+     
   }
 　　
   render(props, state){
       return (
           <div>
               <div className = "board">
-                {this.state.allposts.map((post) => {
-                    return (
-                        <Postit data = {post} />
-                    )
-                })}
+                    {Object.keys(this.state.postsbypaper).map(val => {
+                        if(val === undefined) return;
+                        if(this.state.papers[val] === undefined) return ;
+
+                        return (
+                            <div className = "paper">
+
+                                <div className = "title">PaperID:{val}, {this.state.papers[val].name}</div>
+                                {this.state.postsbypaper[val].map(data => {
+                                    return (
+                                        <Postit data = {data} />
+                                    )
+                                })}
+                            </div>
+                        )
+                    })}
               </div>
 
               <div className = "postit_area">
                   {Object.keys(this.state.myposts).map((key) => {
                       return (
                          <div className = "mypostit">
+                            <div>
+                                <input id = {key} type = 'text' onChange = {this.change_paper} placeholder = 'paper_id' value = {this.state.myposts[key].paper_id}></input>
+                            </div>
                             <button id = {key} className = 'send' onClick = {this.send}>send</button>
                             <textarea id = {key} className = 'textarea' value = {this.state.myposts[key].text} onChange = {this.change}></textarea> 
                          </div>
