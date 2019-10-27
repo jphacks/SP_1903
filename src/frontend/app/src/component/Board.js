@@ -73,6 +73,7 @@ class Board extends React.Component {
     let clone = {}
     Object.assign(clone , this.state.myposts);
     clone[this.state.count] = {
+        "paper_id": 1,
         "text":"text"
     }
     this.setState({count : this.state.count + 1})
